@@ -16,8 +16,7 @@
 
 domainName=$1
 
-
-
+#todo
 
 #####################################################################
 
@@ -86,11 +85,11 @@ cat webservers.txt | waybackurls >> $domainName/waybackdata/waybackurl.txt
 
 # enumeration with cloud_enum
 
-
+python3 ~/tools/cloud_enum/cloud_enum.py -k $domainName >> touch ~/$domainName/urls/waybackdata/cloud_enum.txt
 
 # enumerating buckets
 
-
+python3 ~/tools/S3Scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
 
 
 
