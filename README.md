@@ -17,9 +17,16 @@ The tools used are:
 7) <a href="https://github.com/initstring/cloud_enum">cloud_enum</a>
 8) <a href="https://github.com/sa7mon/S3Scanner">S3Scanner</a>
 
+You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">recon-tools</a> script to automatically install required tools.
+
 # Usage
 
 You need to run this script as root or with sudo.
+Change following portion of code based on your setup.
+```
+!!todo script paths here
+```
+
 Usage:
 ```
 chmod +x install.sh;./install.sh <target-domain>
