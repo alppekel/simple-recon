@@ -4,7 +4,7 @@
 
 Tested on Debian 11.02 amd64
 
-This script automates the process of installing following tools:
+This script use various open source tools to perform reconnaissance on given domain.
 
 The tools used are:
 
@@ -17,9 +17,6 @@ The tools used are:
 7) <a href="https://github.com/initstring/cloud_enum">cloud_enum</a>
 8) <a href="https://github.com/sa7mon/S3Scanner">S3Scanner</a>
 
-
-
-
 # Usage
 
 You need to run this script as root or with sudo.
@@ -28,4 +25,10 @@ Usage:
 chmod +x install.sh;./install.sh <target-domain>
 ```
 
+# Script output:
+
+Script creates following folder structure:
+```
+todo!!
+```
 
