@@ -25,8 +25,6 @@ Usage:
 chmod +x install.sh;./install.sh <target-domain>
 ```
 
-# Script output:
-
 Script creates following folder structure:
 ```
 todo!!
