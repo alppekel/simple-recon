@@ -22,6 +22,7 @@ You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">
 # Usage
 
 You need to run this script as root or with sudo.
+
 Change following portion of code based on your setup.
 ```
 !!todo script paths here
