@@ -4,7 +4,7 @@
 
 Tested on Debian 11.02 amd64
 
-This script use various open source tools to perform reconnaissance on given domain.
+This script use various open source tools to perform reconnaissance on given domain and saves the result in organized manner.
 
 The tools used are:
 
