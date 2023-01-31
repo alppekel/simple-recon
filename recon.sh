@@ -18,7 +18,6 @@ domainName=$1
 
 # script paths
 
-dir_ctfr=~/tools/py-scripts
 dir_cloud_enum=~/tools/cloud_enum
 dir_s3scanner=~/tools/S3Scanner
 dir_assetfinder=~/tools/
@@ -41,10 +40,6 @@ touch ~/$domainName/urls/waybackdata/s3scanner-buckets.txt
 #####################################################################
 
 ######################## finding subdomains #########################
-
-# enumerating subdomains with ctfr.py
-
-python3 $dir_ctfr/ctfr.py -d $domainName -o /tmp/domains_temp.txt
 
 # enumerating subdomains with subfinder
 
