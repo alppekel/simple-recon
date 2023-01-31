@@ -61,9 +61,6 @@ cat ~/$fileName/subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> ~/$fileName
 
 ######################## enumerating urls ###########################
 
-echo "enumerating urls from waybackdata"
-cat ~/$fileName/webservers.txt | waybackurls >> ~/$fileName/urls/waybackurl.txt
-
 echo "enumerating urls with getallurls (gau)"
 cat ~/$fileName/webservers.txt | gau --threads 5 >> ~/$fileName/urls/gau-urls.txt
 
