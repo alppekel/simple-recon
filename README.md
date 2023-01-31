@@ -23,9 +23,17 @@ You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">
 
 You need to run this script as root or with sudo.
 
-Change following portion of code based on your setup.
+Change "script phats" section of following portion of code based on your setup.
 ```
-!!todo script paths here
+####################### setting up variables ########################
+
+domainName=$1
+
+# script phats
+
+dir-ctfr=~/tools/py-scripts
+dir-cloud_enum=~/tools/cloud_enum
+dir-s3scanner=~/tools/S3Scanner
 ```
 
 Usage:
