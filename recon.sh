@@ -65,9 +65,6 @@ cat /tmp/wildcardDomains.txt | ./assetfinder -subs-only >> /tmp/domains_temp.txt
 
 sort -u domains_temp.txt | awk '!/\*/' >> ~/$domainName/subdomains.txt
 
-rm /tmp/wildcardDomains.txt
-rm /tmp/domains_temp.txt
-
 #####################################################################
 
 ######################## enumerating github #########################
@@ -100,5 +97,6 @@ python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> touch ~/$domainName/urls
 
 python3 $dir_s3scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
 
-
+#rm /tmp/wildcardDomains.txt
+#rm /tmp/domains_temp.txt
 
