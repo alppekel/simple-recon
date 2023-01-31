@@ -34,6 +34,9 @@ domainName=$1
 dir-ctfr=~/tools/py-scripts
 dir-cloud_enum=~/tools/cloud_enum
 dir-s3scanner=~/tools/S3Scanner
+dir-assetfinder=~/tools/
+
+#####################################################################
 ```
 
 Usage:
