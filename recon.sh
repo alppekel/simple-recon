@@ -21,6 +21,7 @@ domainName=$1
 dir-ctfr=~/tools/py-scripts
 dir-cloud_enum=~/tools/cloud_enum
 dir-s3scanner=~/tools/S3Scanner
+dir-assetfinder=~/tools/
 
 #####################################################################
 
@@ -43,25 +44,29 @@ touch ~/$domainName/urls/waybackdata/s3scanner-buckets.txt
 
 # enumerating subdomains with ctfr.py
 
-python3 $dir-ctfr/ctfr.py -d $domainName -o domains_temp.txt
+python3 $dir-ctfr/ctfr.py -d $domainName -o /tmp/domains_temp.txt
 
 # enumerating subdomains with subfinder
 
-subfinder -d $domainName -o domains_temp.txt
+subfinder -d $domainName -o /tmp/domains_temp.txt
 
 # enumerating subdomains with assetfinder
 
-./assetfinder -subs-only $domainName >> domains_temp.txt
+cd $dir-assetfinder
+
+./assetfinder -subs-only $domainName >> /tmp/domains_temp.txt
 
 # enumerating subdomains from wildcard domains
 
-cat domains_temp.txt |grep "*." >> wildcardDomains.txt
-cat wildcardDomains.txt | ./assetfinder -subs-only >> domains_temp.txt
+cat /tmp/domains_temp.txt |grep "*." >> /tmp/wildcardDomains.txt
+cat /tmp/wildcardDomains.txt | ./assetfinder -subs-only >> /tmp/domains_temp.txt
 
 # cleanup - removing duplicates and wildcard domains
 
-sort -u domains_temp.txt | awk '!/\*/' >> subdomains.txt
-rm domains_temp.txt
+sort -u domains_temp.txt | awk '!/\*/' >> ~/$domainName/subdomains.txt
+
+rm /tmp/wildcardDomains.txt
+rm /tmp/domains_temp.txt
 
 #####################################################################
 
@@ -73,7 +78,7 @@ github-subdomains -d $domainName -t >> ~/$domainName/github-data.txt
 
 ######################## finding live subdomains ####################
 
-cat subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> webservers.txt
+cat ~/$domainName/subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> ~/$domainName/webservers.txt
 
 #####################################################################
 
@@ -81,7 +86,7 @@ cat subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> webservers.txt
 
 # enumerating urls from waybackdata
 
-cat webservers.txt | waybackurls >> $domainName/waybackdata/waybackurl.txt
+cat ~/$domainName/webservers.txt | waybackurls >> ~/$domainName/waybackdata/waybackurl.txt
 
 #####################################################################
 
