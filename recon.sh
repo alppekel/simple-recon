@@ -61,7 +61,7 @@ cd $dir_assetfinder
 cat /tmp/domains_temp.txt |grep "*." >> /tmp/wildcardDomains.txt
 cat /tmp/wildcardDomains.txt | ./assetfinder -subs-only >> /tmp/domains_temp.txt
 
-# cleanup - removing duplicates and wildcard domains
+# removing duplicates and wildcard domains
 
 sort -u domains_temp.txt | awk '!/\*/' >> ~/$domainName/subdomains.txt
 
@@ -91,12 +91,16 @@ cat ~/$domainName/webservers.txt | waybackurls >> ~/$domainName/waybackdata/wayb
 
 # enumeration with cloud_enum
 
-python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> touch ~/$domainName/urls/waybackdata/cloud_enum.txt
+python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$domainName/urls/waybackdata/cloud_enum.txt
 
-# enumerating buckets
+# enumerating buckets !!!!
 
-python3 $dir_s3scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
+#python3 $dir_s3scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
 
-#rm /tmp/wildcardDomains.txt
-#rm /tmp/domains_temp.txt
+#####################################################################
+
+############################# cleanup ###############################
+
+rm /tmp/wildcardDomains.txt
+rm /tmp/domains_temp.txt
 
