@@ -12,11 +12,15 @@
 
 #####################################################################
 
-# Setting up variables
+####################### setting up variables ########################
 
 domainName=$1
 
-#todo
+# script paths
+
+dir-ctfr=~/tools/py-scripts
+dir-cloud_enum=~/tools/cloud_enum
+dir-s3scanner=~/tools/S3Scanner
 
 #####################################################################
 
@@ -39,7 +43,7 @@ touch ~/$domainName/urls/waybackdata/s3scanner-buckets.txt
 
 # enumerating subdomains with ctfr.py
 
-python3 ~/tools/py-scripts/ctfr.py -d $domainName -o domains_temp.txt
+python3 $dir-ctfr/ctfr.py -d $domainName -o domains_temp.txt
 
 # enumerating subdomains with subfinder
 
@@ -85,11 +89,11 @@ cat webservers.txt | waybackurls >> $domainName/waybackdata/waybackurl.txt
 
 # enumeration with cloud_enum
 
-python3 ~/tools/cloud_enum/cloud_enum.py -k $domainName >> touch ~/$domainName/urls/waybackdata/cloud_enum.txt
+python3 $dir-cloud_enum/cloud_enum.py -k $domainName >> touch ~/$domainName/urls/waybackdata/cloud_enum.txt
 
 # enumerating buckets
 
-python3 ~/tools/S3Scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
+python3 $dir-s3scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
 
 
 
