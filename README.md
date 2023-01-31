@@ -23,7 +23,7 @@ You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">
 
 You need to run this script as root or with sudo.
 
-Change "script paths" section of following portion of code based on your setup.
+Change "script paths" section
 ```
 ####################### setting up variables ########################
 
