@@ -19,7 +19,6 @@ domainName=$1
 # script paths
 
 dir_cloud_enum=~/tools/cloud_enum
-dir_s3scanner=~/tools/S3Scanner
 dir_assetfinder=~/tools/
 
 #####################################################################
@@ -82,9 +81,9 @@ cat ~/$domainName/webservers.txt | waybackurls >> ~/$domainName/waybackdata/wayb
 
 python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$domainName/cloud_data/cloud_enum.txt
 
-# enumerating buckets !!!!
+# enumerating buckets
 
-#python3 $dir_s3scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
+s3scanner -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
 
 #####################################################################
 
