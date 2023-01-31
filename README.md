@@ -39,7 +39,7 @@ Usage:
 chmod +x install.sh;./install.sh <target-domain>
 ```
 
-Script save results in following format:
+Script save results in seperate files as follow:
 ```
 todo!!
 ```
