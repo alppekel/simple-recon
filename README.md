@@ -49,3 +49,8 @@ Script save results in following format:
 todo!!
 ```
 
+In case you want to use subfinder with api keys, you can use following oneliner to change subfinder's config file attributes
+```
+todo!!
+```
+
