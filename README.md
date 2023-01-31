@@ -23,13 +23,13 @@ You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">
 
 You need to run this script as root or with sudo.
 
-Change "script phats" section of following portion of code based on your setup.
+Change "script paths" section of following portion of code based on your setup.
 ```
 ####################### setting up variables ########################
 
 domainName=$1
 
-# script phats
+# script paths
 
 dir-ctfr=~/tools/py-scripts
 dir-cloud_enum=~/tools/cloud_enum
