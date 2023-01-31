@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 #####################################################################
 
 # #
@@ -25,70 +23,61 @@ dir_assetfinder=~/tools/
 
 # creating folders and files
 
-mkdir ~/$domainName
-touch ~/$domainName/subdomains.txt
-touch ~/$domainName/webservers.txt
-touch ~/$domainName/github-data.txt
-mkdir ~/$domainName/urls
-mkdir ~/$domainName/urls/waybackdata
-touch ~/$domainName/urls/waybackdata/waybackurls.txt
-mkdir ~/$domainName/cloud_data
-touch ~/$domainName/urls/waybackdata/cloud_enum.txt
-touch ~/$domainName/urls/waybackdata/s3scanner-buckets.txt
+fileName=${domainName//.com}
+
+mkdir ~/$fileName
+touch ~/$fileName/subdomains.txt
+touch ~/$fileName/webservers.txt
+mkdir ~/$fileName/urls
+mkdir ~/$fileName/cloud_data
 
 #####################################################################
 
 ######################## finding subdomains #########################
 
-# enumerating subdomains with subfinder
+echo "enumerating subdomains with subfinder"
+subfinder -d $domainName -o ~/domains_temp.txt
 
-subfinder -d $domainName -o /tmp/domains_temp.txt
-
-# enumerating subdomains with assetfinder
-
+echo "enumerating subdomains with assetfinder"
 cd $dir_assetfinder
 
-./assetfinder -subs-only $domainName >> /tmp/domains_temp.txt
+./assetfinder -subs-only $domainName >> ~/domains_temp.txt
 
-# enumerating subdomains from wildcard domains
+echo "enumerating subdomains from wildcard domains"
+cat ~/domains_temp.txt |grep "*." >> ~/wildcardDomains.txt
+cat ~/wildcardDomains.txt | ./assetfinder -subs-only >> ~/domains_temp.txt
 
-cat /tmp/domains_temp.txt |grep "*." >> /tmp/wildcardDomains.txt
-cat /tmp/wildcardDomains.txt | ./assetfinder -subs-only >> /tmp/domains_temp.txt
-
-# removing duplicates and wildcard domains
-
-sort -u domains_temp.txt | awk '!/\*/' >> ~/$domainName/subdomains.txt
+echo "removing duplicates and wildcard domains"
+sort -u ~/domains_temp.txt | awk '!/\*/' >> ~/$fileName/subdomains.txt
 
 #####################################################################
 
 ######################## finding live subdomains ####################
 
-cat ~/$domainName/subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> ~/$domainName/webservers.txt
+echo "finding live subdomains"
+cat ~/$fileName/subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> ~/$fileName/webservers.txt
 
 #####################################################################
 
 ######################## enumerating urls ###########################
 
-# enumerating urls from waybackdata
+echo "enumerating urls from waybackdata"
+cat ~/$fileName/webservers.txt | waybackurls >> ~/$fileName/urls/waybackurl.txt
 
-cat ~/$domainName/webservers.txt | waybackurls >> ~/$domainName/waybackdata/waybackurl.txt
+echo "enumerating urls with getallurls (gau)"
+cat ~/$fileName/webservers.txt | gau --threads 5 >> ~/$fileName/urls/gau-urls.txt
 
 #####################################################################
 
 #################### enumerating cloud assets #######################
 
-# enumeration with cloud_enum
+echo "enumeration with cloud_enum"
 
-python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$domainName/cloud_data/cloud_enum.txt
-
-# enumerating buckets
-
-s3scanner -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
+python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$fileName/cloud_data/cloud_enum.txt
 
 #####################################################################
 
 ############################# cleanup ###############################
 
-rm /tmp/wildcardDomains.txt
-rm /tmp/domains_temp.txt
-
+rm ~/wildcardDomains.txt
+rm ~/domains_temp.txt
