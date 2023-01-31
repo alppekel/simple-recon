@@ -80,7 +80,7 @@ cat ~/$domainName/webservers.txt | waybackurls >> ~/$domainName/waybackdata/wayb
 
 # enumeration with cloud_enum
 
-python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$domainName/urls/waybackdata/cloud_enum.txt
+python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$domainName/cloud_data/cloud_enum.txt
 
 # enumerating buckets !!!!
 
