@@ -67,12 +67,6 @@ sort -u domains_temp.txt | awk '!/\*/' >> ~/$domainName/subdomains.txt
 
 #####################################################################
 
-######################## enumerating github #########################
-
-github-subdomains -d $domainName -t >> ~/$domainName/github-data.txt
-
-#####################################################################
-
 ######################## finding live subdomains ####################
 
 cat ~/$domainName/subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> ~/$domainName/webservers.txt
