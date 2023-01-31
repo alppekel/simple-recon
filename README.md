@@ -29,10 +29,8 @@ domainName=$1
 
 # script paths
 
-dir-ctfr=~/tools/py-scripts
-dir-cloud_enum=~/tools/cloud_enum
-dir-s3scanner=~/tools/S3Scanner
-dir-assetfinder=~/tools/
+dir_cloud_enum=~/tools/cloud_enum
+dir_assetfinder=~/tools/
 
 #####################################################################
 ```
