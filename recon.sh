@@ -18,10 +18,10 @@ domainName=$1
 
 # script paths
 
-dir-ctfr=~/tools/py-scripts
-dir-cloud_enum=~/tools/cloud_enum
-dir-s3scanner=~/tools/S3Scanner
-dir-assetfinder=~/tools/
+dir_ctfr=~/tools/py-scripts
+dir_cloud_enum=~/tools/cloud_enum
+dir_s3scanner=~/tools/S3Scanner
+dir_assetfinder=~/tools/
 
 #####################################################################
 
@@ -44,7 +44,7 @@ touch ~/$domainName/urls/waybackdata/s3scanner-buckets.txt
 
 # enumerating subdomains with ctfr.py
 
-python3 $dir-ctfr/ctfr.py -d $domainName -o /tmp/domains_temp.txt
+python3 $dir_ctfr/ctfr.py -d $domainName -o /tmp/domains_temp.txt
 
 # enumerating subdomains with subfinder
 
@@ -52,7 +52,7 @@ subfinder -d $domainName -o /tmp/domains_temp.txt
 
 # enumerating subdomains with assetfinder
 
-cd $dir-assetfinder
+cd $dir_assetfinder
 
 ./assetfinder -subs-only $domainName >> /tmp/domains_temp.txt
 
@@ -94,11 +94,11 @@ cat ~/$domainName/webservers.txt | waybackurls >> ~/$domainName/waybackdata/wayb
 
 # enumeration with cloud_enum
 
-python3 $dir-cloud_enum/cloud_enum.py -k $domainName >> touch ~/$domainName/urls/waybackdata/cloud_enum.txt
+python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> touch ~/$domainName/urls/waybackdata/cloud_enum.txt
 
 # enumerating buckets
 
-python3 $dir-s3scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
+python3 $dir_s3scanner/s3scanner.py -l subdomains.txt -o ~/$domainName/cloud_data/buckets.txt
 
 
 
