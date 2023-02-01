@@ -68,7 +68,7 @@ cat ~/$fileName/webservers.txt | gau --threads 5 >> ~/$fileName/urls/gau-urls.tx
 
 #################### enumerating cloud assets #######################
 
-echo "enumeration with cloud_enum"
+echo "enumerating with cloud_enum"
 
 python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$fileName/cloud_data/cloud_enum.txt
 
