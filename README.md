@@ -12,7 +12,8 @@ The tools used are:
 2) <a href="https://github.com/tomnomnom/assetfinder">assetfinder</a>
 3) <a href="https://github.com/tomnomnom/httprobe">httprobe</a>
 4) <a href="https://github.com/lc/gau">getallurls (gau)</a>
-5) <a href="https://github.com/initstring/cloud_enum">cloud_enum</a>
+5) <a href="https://github.com/jaeles-project/gospider">gospider</a>
+6) <a href="https://github.com/initstring/cloud_enum">cloud_enum</a>
 
 You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">recon-tools</a> script to automatically install required tools.
 
