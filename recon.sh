@@ -66,6 +66,14 @@ cat ~/$fileName/webservers.txt | gau --threads 5 >> ~/$fileName/urls/gau-urls.tx
 
 #####################################################################
 
+######################## enumerating links ###########################
+
+echo "enumerating links"
+gospider -S ~/$fileName/webservers.txt -c 10 -d 1 -o ~/$fileName/urls/$domainName-links
+
+#####################################################################
+
+
 #################### enumerating cloud assets #######################
 
 echo "enumerating with cloud_enum"
