@@ -73,7 +73,6 @@ gospider -S ~/$fileName/webservers.txt -c 10 -d 1 -o ~/$fileName/urls/$domainNam
 
 #####################################################################
 
-
 #################### enumerating cloud assets #######################
 
 echo "enumerating with cloud_enum"
@@ -82,7 +81,17 @@ python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$fileName/cloud_data/c
 
 #####################################################################
 
+#################### generating zip file #######################
+
+echo "compressing files to zip"
+
+apt-get install zip -y
+zip -r $fileName.zip $fileName
+
+#####################################################################
+
 ############################# cleanup ###############################
 
 rm ~/wildcardDomains.txt
 rm ~/domains_temp.txt
+echo "done"
