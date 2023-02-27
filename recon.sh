@@ -62,7 +62,7 @@ cat ~/$fileName/subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> ~/$fileName
 ######################## enumerating urls ###########################
 
 echo "enumerating urls with getallurls (gau) - this may take some time"
-cat ~/$fileName/webservers.txt | gau --blacklist png,jpg,svg,gif,woff,woff2,eot,otf --threads 5 >> ~/$fileName/urls/gau-urls.txt
+cat ~/$fileName/webservers.txt | gau --blacklist png,jpg,svg,gif,woff,woff2,eot,otf,ttf --threads 5 >> ~/$fileName/urls/gau-urls.txt
 
 #####################################################################
 
