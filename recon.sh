@@ -86,7 +86,7 @@ python3 $dir_cloud_enum/cloud_enum.py -k $domainName >> ~/$fileName/cloud_data/c
 echo "compressing files to zip"
 
 apt-get install zip -y
-zip -r ~/$fileName.zip $fileName
+zip -r ~/$fileName.zip ~/$fileName
 
 #####################################################################
 
