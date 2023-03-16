@@ -14,6 +14,8 @@ The tools used are:
 4) <a href="https://github.com/lc/gau">getallurls (gau)</a>
 5) <a href="https://github.com/jaeles-project/gospider">gospider</a>
 6) <a href="https://github.com/initstring/cloud_enum">cloud_enum</a>
+7) <a href="https://github.com/gwen001/github-subdomains">github-subdomains</a>
+8) <a href="https://github.com/tomnomnom/anew">anew</a>
 
 You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">recon-tools</a> script to automatically install required tools.
 
@@ -31,6 +33,7 @@ domainName=$1
 
 dir_cloud_enum=~/tools/cloud_enum
 dir_assetfinder=~/tools/
+export GITHUB_TOKEN=<github token here>
 
 #####################################################################
 ```
