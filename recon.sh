@@ -18,6 +18,7 @@ domainName=$1
 
 dir_cloud_enum=~/tools/cloud_enum
 dir_assetfinder=~/tools/
+export GITHUB_TOKEN=<github token here>
 
 #####################################################################
 
@@ -47,6 +48,14 @@ echo "enumerating subdomains from wildcard domains"
 cat ~/domains_temp.txt |grep "*." >> ~/wildcardDomains.txt
 cat ~/wildcardDomains.txt | ./assetfinder -subs-only >> ~/domains_temp.txt
 
+echo "enumerating subdomains with jldc.me"
+#https://github.com/KingOfBugbounty/KingOfBugBountyTips
+curl -s "https://jldc.me/anubis/subdomains/$domainName" | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" >> ~/domains_temp.txt
+
+echo "enumerating subdomains from github"
+github-subdomains -d $domainName -o ~/$fileName/github-domains.txt
+cat ~/$fileName/github-domains.txt >> ~/domains_temp.txt
+
 echo "removing duplicates and wildcard domains"
 sort -u ~/domains_temp.txt | awk '!/\*/' >> ~/$fileName/subdomains.txt
 
@@ -59,17 +68,18 @@ cat ~/$fileName/subdomains.txt | httprobe -c 50 -t 3000 | sort -u >> ~/$fileName
 
 #####################################################################
 
+echo "enumerating subdomains using gospider"
+
+#https://github.com/KingOfBugbounty/KingOfBugBountyTips
+gospider -d 0 -S ~/$fileName/webservers.txt -c 5 -t 100 -d 5 --blacklist jpg,jpeg,gif,css,tif,tiff,png,ttf,woff,woff2,ico,pdf,svg,txt | grep -Eo '(http|https)://[^/"]+' | anew ~/$fileName/scrapped_domains.txt
+
+cat ~/$fileName/scrapped_domains.txt | grep $fileName >> ~/$fileName/scrapped_domains_$domainName.txt
+
+
 ######################## enumerating urls ###########################
 
 echo "enumerating urls with getallurls (gau) - this may take some time"
-cat ~/$fileName/webservers.txt | gau --blacklist png,jpg,svg,gif,woff,woff2,eot,otf,ttf --threads 5 >> ~/$fileName/urls/gau-urls.txt
-
-#####################################################################
-
-######################## enumerating links ###########################
-
-echo "enumerating links"
-gospider -S ~/$fileName/webservers.txt -c 10 -d 1 -o ~/$fileName/urls/$domainName-links
+cat ~/$fileName/webservers.txt | gau --blacklist png,jpg,jpeg,svg,gif,woff,woff2,eot,otf,ttf,css,pdf --threads 100 >> ~/$fileName/urls/gau-urls.txt
 
 #####################################################################
 
@@ -94,4 +104,5 @@ zip -r ~/$fileName.zip ~/$fileName
 
 rm ~/wildcardDomains.txt
 rm ~/domains_temp.txt
+unset GITHUB_TOKEN
 echo "done"
