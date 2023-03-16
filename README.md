@@ -23,7 +23,7 @@ You can also use my <a href="https://github.com/alppekel/bugbounty-recon-tools">
 
 You need to run this script as root.
 
-Change "script paths" section. Point out to the directories where cloud_enum and assetfinder are located.
+Change "script paths" section.
 ```
 ####################### setting up variables ########################
 
